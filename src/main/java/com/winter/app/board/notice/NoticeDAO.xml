@@ -5,10 +5,19 @@
 
 <mapper namespace="com.winter.app.board.notice.NoticeDAO">
 	
-	<select id="list" parameterType="NoticeDTO">
-		SELECT * FROM notice ORDER BY board_num DESC
+	<select id="list" resultType="NoticeDTO" parameterType="Pager">
+		SELECT * 
+		FROM notice 
+		ORDER BY board_num 
+		DESC
+		LIMIT #{startNum}, #{perPage}
+	</select>
+	
+	<select id="count" resultType="Long">
+   		 SELECT COUNT(*) FROM notice
 	</select>
 
+	
 	<select id="detail" resultType="NoticeDTO" parameterType="NoticeDTO">
 		SELECT * FROM notice WHERE board_num=#{boardNum}
 	</select>
@@ -27,4 +36,5 @@
 	<delete id="delete" parameterType="NoticeDTO">
 		DELETE FROM notice where board_num=#{boardNum}
 	</delete>
+	
 </mapper>
