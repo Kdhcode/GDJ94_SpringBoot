@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.winter.app.util.Pager;
+
 @Controller
 @RequestMapping("/qna/*")
 public class QnaController {
@@ -16,8 +18,8 @@ public class QnaController {
 	private QnaService qnaService;
 	
 	@GetMapping("list")
-	public void list(Model model) throws Exception {
-		List<QnaDTO> list = qnaService.list();
+	public void list(Pager pager, Model model) throws Exception {
+		List<QnaDTO> list = qnaService.list(pager);
 		model.addAttribute("list",list);
 	}
 }

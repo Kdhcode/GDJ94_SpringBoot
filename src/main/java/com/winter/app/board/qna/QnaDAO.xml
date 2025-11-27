@@ -5,8 +5,26 @@
 
 
 <mapper namespace="com.winter.app.board.qna.QnaDAO">
-	<select id="list" resultType="QnaDTO">
-		SELECT * FROM qna ORDER BY board_num DESC;
+	<sql id="search">
+		<if test="kind == 'k1'">
+			WHERE board_title LIKE concat('%', #{search}, '%')
+		</if>
+		<if test="kind == 'k2'">
+			WHERE board_contents LIKE concat('%', #{search}, '%')
+		</if>
+		<if test="kind == 'k3'">
+			WHERE board_writer LIKE concat('%', #{search}, '%')
+		</if>
+	</sql>
+	<select id="list" resultType="QnaDTO" parameterType="Pager">
+		SELECT * FROM qna 
+		<include refid="search"/>
+		ORDER BY board_num DESC LIMIT #{startNum}, #{perPage};
+	</select>
+	
+	<select id="count" resultType="Long" parameterType="pager">
+   		 SELECT COUNT(*) FROM qna	 
+   		 <include refid="search"/>
 	</select>
 	
 	<insert id="add" parameterType="QnaDTO">

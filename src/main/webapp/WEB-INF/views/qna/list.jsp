@@ -27,11 +27,16 @@
                 <div class="container-fluid">
                 	<!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">공지사항</h1>
+                        <h1 class="h3 mb-0 text-gray-800">QnA</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     
+                   	<!-- Search -->
+	               <c:import url="/WEB-INF/views/template/search.jsp"></c:import>
+                    	
+                    		
+                   
                     <!-- Content Row -->
                     <div class="row justify-content-center">
                     	<table class="table col-sm-8 mt-5">
@@ -63,26 +68,35 @@
                     		</tbody>
                     	</table>
             		</div>
-            		<div class="row justify-content-center">
-                    	<nav aria-label="Page navigation example">
-						  <ul class="pagination ">
-						    <li class="page-item">
-						      <a class="page-link" href="./list?page=${pager.begin-1}" aria-label="Previous">
-						        <span aria-hidden="true">&laquo;</span>
-						      </a>
-						    </li>
-						    <c:forEach begin="${pager.begin}" end="${pager.end}" var="i">
-						    <li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>
-						    </c:forEach>
-						    <li class="page-item">
-						      <a class="page-link" href="./list?page=${pager.end+1}" aria-label="Next">
-						        <span aria-hidden="true">&raquo;</span>
-						      </a>
-						    </li>
-						  </ul>
-						</nav>
-                    </div>
-                    
+            		
+                    <div class="row justify-content-center mt-4">
+                    <nav>
+                        <ul class="pagination">
+
+                            <li class="page-item">
+                                <a class="page-link" href="./list?page=${pager.begin-1}&kind=${pager.kind}&search=${pager.search}">
+                                    &laquo;
+                                </a>
+                            </li>
+
+                            <c:forEach begin="${pager.begin}" end="${pager.end}" var="i">
+                                <li class="page-item ${pager.page == i ? 'active' : ''}">
+                                    <a class="page-link"
+                                       href="./list?page=${i}&kind=${pager.kind}&search=${pager.search}">
+                                        ${i}
+                                    </a>
+                                </li>
+                            </c:forEach>
+
+                            <li class="page-item">
+                                <a class="page-link" href="./list?page=${pager.end+1}&kind=${pager.kind}&search=${pager.search}">
+                                    &raquo;
+                                </a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
                 
                 </div>
                 <!-- /.container-fluid -->

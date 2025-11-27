@@ -19,5 +19,5 @@ public interface NoticeDAO {
 
 	public List<NoticeDTO> list(Pager pager) throws Exception;
 	
-	public Long count() throws Exception;
+	public Long count(Pager pager) throws Exception;
 }
