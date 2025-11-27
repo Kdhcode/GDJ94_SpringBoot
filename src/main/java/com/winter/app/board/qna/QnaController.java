@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.winter.app.util.Pager;
@@ -22,4 +23,12 @@ public class QnaController {
 		List<QnaDTO> list = qnaService.list(pager);
 		model.addAttribute("list",list);
 	}
+	
+	@PostMapping("add")
+	public String add(QnaDTO qnaDTO) throws Exception{
+		qnaService.add(qnaDTO);
+		return "redirect:./list";
+	}
+	@GetMapping("add")
+	public void add() {}
 }

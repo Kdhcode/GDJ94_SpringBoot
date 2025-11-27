@@ -21,6 +21,8 @@ public class QnaService {
 	}
 	
 	public int add(QnaDTO qnaDTO) throws Exception{
-		return qnaDAO.add(qnaDTO);
+		int result = qnaDAO.add(qnaDTO);
+		qnaDAO.refUpdate(qnaDTO);
+		return result;
 	}
 }

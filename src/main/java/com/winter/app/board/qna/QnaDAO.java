@@ -13,4 +13,6 @@ public interface QnaDAO {
 	public Long count(Pager pager) throws Exception;
 	
 	public int add(QnaDTO qnaDTO) throws Exception;
+	
+	public void refUpdate(QnaDTO qnaDTO) throws Exception;
 }
