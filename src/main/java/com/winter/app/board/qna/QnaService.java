@@ -26,6 +26,7 @@ public class QnaService implements BoardService{
 	@Override
 	public int add(BoardDTO boardDTO) throws Exception {
 		int result = qnaDAO.add(boardDTO);
+		qnaDAO.refUpdate(boardDTO);
 		return result;
 	}
 

@@ -5,10 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.winter.app.board.BoardDAO;
+import com.winter.app.board.BoardDTO;
 import com.winter.app.util.Pager;
 
 @Mapper
 public interface QnaDAO extends BoardDAO{
 	
-	public void refUpdate(QnaDTO qnaDTO) throws Exception;
+	public void refUpdate(BoardDTO boardDTO) throws Exception;
 }
