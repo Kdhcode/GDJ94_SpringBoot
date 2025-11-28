@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.winter.app.board.BoardDTO;
 import com.winter.app.util.Pager;
 
 @Controller
@@ -20,7 +21,7 @@ public class QnaController {
 	
 	@GetMapping("list")
 	public void list(Pager pager, Model model) throws Exception {
-		List<QnaDTO> list = qnaService.list(pager);
+		List<BoardDTO> list = qnaService.list(pager);
 		model.addAttribute("list",list);
 	}
 	

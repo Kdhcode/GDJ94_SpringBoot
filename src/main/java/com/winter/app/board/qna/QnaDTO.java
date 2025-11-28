@@ -2,18 +2,16 @@ package com.winter.app.board.qna;
 
 import java.time.LocalDate;
 
+import com.winter.app.board.BoardDTO;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
-public class QnaDTO {
-	private Long boardNum;
-	private String boardWriter;
-	private String boardTitle;
-	private String boardContents;
-	private LocalDate boardDate;
-	private Long boardHit;
+@ToString
+public class QnaDTO extends BoardDTO{
 	private Long boardRef;
 	private Long boardStep;
 	private Long boardDepth;
