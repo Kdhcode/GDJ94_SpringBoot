@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="/WEB-INF/views/template/head.jsp"/>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.css" rel="stylesheet">
 </head>
 <body id="page-id">
 	<div id="wrapper">
@@ -28,52 +29,39 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Detail Page</h1>
+                        <h1 class="h3 mb-0 text-gray-800">게시글 등록</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     
                     <!-- Content Row -->
 					<div class="row justify-content-center">
-					    <div class="col-lg-8">
-					
-					        <!-- Board Detail Card -->
-					        <div class="card shadow mb-4">
-					
-					            <!-- Card Header -->
-					            <div class="card-header py-3 bg-light d-flex justify-content-between align-items-center">
-					                <h5 class="m-0 font-weight-bold text-primary">${dto.boardTitle}</h5>
-					                <span class="text-muted small">조회수: ${dto.boardHit}</span>
-					            </div>
-					
-					            <!-- Card Body -->
+					    <div class="col-md-7">
+					        <div class="card shadow-sm mb-4">
 					            <div class="card-body">
-					
-					                <!-- Writer -->
-					                <div class="mb-3">
-					                    <label class="font-weight-bold text-dark mr-2">작성자:</label>
-					                    <span>${dto.boardWriter}</span>
-					                </div>
-					
-					                <hr>
-					
-					                <!-- Contents -->
-					                <div class="board-contents" style="white-space: pre-line; line-height: 1.6;">
-					                    ${dto.boardContents}
-					                </div>
-					
+					                <form method="post">
+					                	<input type="hidden" name="boardNum" value="${dto.boardNum}">
+					                    <div class="form-group mb-3">
+					                        <label for="witer" class="text-dark">작성자</label>
+					                        <input id="witer" type="text" class="form-control" name="boardWriter" placeholder="작성자를 입력하세요">
+					                    </div>
+					                    <div class="form-group mb-3">
+					                        <label for="title" class="text-dark">제목</label>
+					                        <input id="title" type="text" class="form-control" name="boardTitle" placeholder="제목을 입력하세요">
+					                    </div>					
+					                    <div class="form-group mb-4">
+					                        <label for="contents" class="text-dark">내용</label>
+					                        <textarea id="contents" class="form-control" name="boardContents" rows="6" placeholder="내용을 입력하세요"></textarea>
+					                    </div>					
+					                    <button type="submit" class="btn btn-primary mr-1">
+					                        등록하기
+					                    </button>		
+					                    <a href="list" class="btn btn-outline-primary" role="button">목록으로</a>			
+					                </form>					
 					            </div>
-					
-					            <!-- Card Footer -->
-					            <div class="card-footer bg-white text-right">
-					                <a href="./list" class="btn btn-secondary btn-sm">목록으로</a>
-					            </div>
-					
-					        </div>
-					
+					        </div>					
 					    </div>
-					</div>
-
+					</div>	            	
             	</div>
 	            <!-- /.container-fluid -->	            	
             </div>
@@ -83,7 +71,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2025</span>
+                        <span>Copyright &copy; Your Website 2021</span>
                     </div>
                 </div>
             </footer>
@@ -92,5 +80,9 @@
     	</div>    
 	</div>
 	<c:import url="/WEB-INF/views/template/foot.jsp"/>
+	<script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-bs4.min.js">	</script>
+	<script type="text/javascript">
+		$("#contents").summernote();
+	</script>
 </body>
 </html>

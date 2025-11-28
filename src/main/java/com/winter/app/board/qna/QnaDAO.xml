@@ -35,10 +35,26 @@
     VALUES
     (#{boardWriter}, #{boardTitle}, #{boardContents}, CURDATE(),
      0, 0, 0, 0)
-</insert>
+	</insert>
 
-<update id="refUpdate" parameterType="QnaDTO">
-	UPDATE qna SET board_ref=#{boardNum} WHERE board_num=#{boardNum}
-</update>
+	<update id="refUpdate" parameterType="QnaDTO">
+		UPDATE qna SET board_ref=#{boardNum} WHERE board_num=#{boardNum}
+	</update>
+	<select id="detail" resultType="QnaDTO" parameterType="QnaDTO">
+		SELECT * FROM qna WHERE board_num=#{boardNum}
+	</select>
 
+	<update id="stepUpdate" parameterType="QnaDTO">
+		UPDATE qna SET board_step= board_Step + 1
+		WHERE board_ref = #{boardRef} AND board_step > #{boardStep}
+	</update>
+	
+	<insert id="replyadd" parameterType="QnaDTO">
+		INSERT INTO qna
+		(board_writer, board_title, board_contents, board_date,
+	    board_hit, board_ref, board_step, board_depth)
+	    VALUES
+	    (#{boardWriter}, #{boardTitle}, #{boardContents}, CURDATE(),
+	    0,#{boardRef},#{boardStep},#{boardDepth})
+	</insert>
 </mapper>

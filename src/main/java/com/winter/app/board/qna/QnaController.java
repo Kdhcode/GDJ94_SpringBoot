@@ -20,9 +20,11 @@ public class QnaController {
 	private QnaService qnaService;
 	
 	@GetMapping("list")
-	public void list(Pager pager, Model model) throws Exception {
+	public String list(Pager pager, Model model) throws Exception {
 		List<BoardDTO> list = qnaService.list(pager);
 		model.addAttribute("list",list);
+		
+		return "board/list";
 	}
 	
 	@PostMapping("add")
@@ -30,6 +32,29 @@ public class QnaController {
 		qnaService.add(qnaDTO);
 		return "redirect:./list";
 	}
+	
 	@GetMapping("add")
-	public void add() {}
+	public String add() {
+		return "board/add";
+	}
+	
+	@GetMapping("detail")
+	public String detail(QnaDTO qnaDTO, Model model) throws Exception {
+		qnaDTO = (QnaDTO)qnaService.detail(qnaDTO);
+		model.addAttribute("dto",qnaDTO);
+		
+		return "board/detail";
+	}
+	
+	@GetMapping("reply")
+	public String reply(QnaDTO qnaDTO, Model model) throws Exception{
+		model.addAttribute("dto", qnaDTO);
+		return "board/add";
+	}
+	@PostMapping("reply")
+	public String reply(QnaDTO qnaDTO) throws Exception {
+		qnaService.reply(qnaDTO);
+		return "redirect:./list";
+	}
+	
 }

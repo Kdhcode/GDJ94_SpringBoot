@@ -16,4 +16,6 @@ public interface BoardDAO {
 	public List<BoardDTO> list(Pager pager) throws Exception;
 	
 	public Long count(Pager pager) throws Exception;
+	
+	public int replyadd(BoardDTO boardDTO) throws Exception;
 }

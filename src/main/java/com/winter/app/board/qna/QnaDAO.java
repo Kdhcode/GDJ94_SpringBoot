@@ -11,5 +11,7 @@ import com.winter.app.util.Pager;
 @Mapper
 public interface QnaDAO extends BoardDAO{
 	
-	public void refUpdate(BoardDTO boardDTO) throws Exception;
+	public int refUpdate(BoardDTO boardDTO) throws Exception;
+	
+	public int stepUpdate(QnaDTO parent) throws Exception;
 }

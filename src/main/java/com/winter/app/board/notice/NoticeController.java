@@ -24,16 +24,20 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@GetMapping("list")
-	public void list(Pager pager, Model model)throws Exception{
+	public String list(Pager pager, Model model)throws Exception{
 		
 		List<BoardDTO> list= noticeService.list(pager);
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
+		
+		return "board/list";
 	}
 	
 	@GetMapping("add")
-	public void add() {}
+	public String add() {
+		return "board/add";
+	}
 	
 	@PostMapping("add")
 	public String add(NoticeDTO noticeDTO) throws Exception {
@@ -42,9 +46,11 @@ public class NoticeController {
 	}
 	
 	@GetMapping("detail")
-	public void detail(BoardDTO boardDTO, Model model) throws Exception {
+	public String detail(BoardDTO boardDTO, Model model) throws Exception {
 		boardDTO = noticeService.detail(boardDTO);
 		model.addAttribute("dto",boardDTO);
+		
+		return "board/detail";
 	}
 	
 	
