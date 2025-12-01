@@ -43,7 +43,7 @@
                                     <h6 class="m-0 font-weight-bold text-primary">${category} ${sub}</h6>
                                 </div>
                                 <div class="card-body">
-                                   <form method="post">
+                                   <form method="post" enctype="multipart/form-data">
                                    	  <input type="hidden" name="boardNum" value="${dto.boardNum}">
 									  <div class="form-group">
 									    <label for="writer">Writer</label>
@@ -64,14 +64,14 @@
 									  <div id="files" class="form-group">
 									  	
 									  </div>
-									  
-									
+									  	
+										
 									  <button type="submit"  class="btn btn-primary">Submit</button>
 									</form>
                                 </div>
                              </div>
                              
-                     </div>           
+                   	  </div>           
                                         
                     </div>
                 
