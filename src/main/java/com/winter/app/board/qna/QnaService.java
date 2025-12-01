@@ -56,7 +56,7 @@ public class QnaService implements BoardService { // BoardService 구현
 			BoardFileDTO boardFileDTO = new QnaFileDTO();
 			boardFileDTO.setFileName(fileName);
 			boardFileDTO.setFileOrigin(f.getOriginalFilename());
-			boardFileDTO.setFileNum(boardDTO.getBoardNum());
+			boardFileDTO.setBoardNum(boardDTO.getBoardNum());
 			
 			qnaDAO.fileAdd(boardFileDTO);
 			

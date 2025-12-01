@@ -30,18 +30,16 @@
     	  
        <select id="list" resultType="QnaDTO" parameterType="Pager">
 			    SELECT * FROM qna 
-			    <if test="kind == 'k1'">
-			    WHERE 
-			       board_title LIKE concat('%',#{search},'%')
-			    </if>
-			    <if test="kind == 'k2'">
-			    WHERE 
-			       board_contents LIKE concat('%',#{search},'%')
-			    </if>
-			    <if test="kind == 'k3'">
-			    WHERE 
-			       board_writer LIKE concat('%',#{search},'%')
-			    </if>
+			    <if test="kind == 'k1' and search != null and search != ''">
+				  WHERE board_title LIKE CONCAT('%', #{search}, '%')
+				</if>
+				<if test="kind == 'k2' and search != null and search != ''">
+				  WHERE board_contents LIKE CONCAT('%', #{search}, '%')
+				</if>
+				<if test="kind == 'k3' and search != null and search != ''">
+				  WHERE board_writer LIKE CONCAT('%', #{search}, '%')
+				</if>
+
 			    
 			    ORDER BY board_ref DESC, board_step ASC
 			    LIMIT #{startNum}, #{perPage}
