@@ -1,45 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="/WEB-INF/views/template/head.jsp"/>
+<c:import url="/WEB-INF/views/template/head.jsp"></c:import>
 </head>
-<body id="page-id">
+<body id="page-top">
 	<div id="wrapper">
 		<!-- side bar -->
-		<c:import url="/WEB-INF/views/template/sidebar.jsp"/>
-		<%-- <c:import url="./template/sidebar.jsp"/> --%>
+		<c:import url="/WEB-INF/views/template/sidebar.jsp"></c:import>
 		<!-- side bar -->
 		
 		<!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
-        	<!-- Main Content -->
+            <!-- Main Content -->
             <div id="content">
-            	<!-- top bar -->
-            	<c:import url="/WEB-INF/views/template/topbar.jsp"/>
-            	<!-- top bar -->
+       			
+       			<!-- topbar -->
+       			<c:import url="/WEB-INF/views/template/topbar.jsp"></c:import>
+            	<!-- topbar -->
             	
             	<!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
+                	<!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Index Page</h1>
+                        <h1 class="h3 mb-0 text-gray-800">Index</h1>
                         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
                     </div>
                     
                     <!-- Content Row -->
                     <div class="row">
-                    	<!-- 생성한 contents 작성 -->
-	            	</div>
-            	</div>
-	            <!-- /.container-fluid -->	            	
-            </div>
+                    
+                    <!-- 생성한 contents 작성 -->
+                    
+                    </div>
+                
+                </div>
+                <!-- /.container-fluid -->
+            </div> 
             <!-- End of Main Content -->
             
             <!-- Footer -->
@@ -51,9 +53,11 @@
                 </div>
             </footer>
             <!-- End of Footer -->
-            
-    	</div>    
+        </div>
+	
 	</div>
-	<c:import url="/WEB-INF/views/template/foot.jsp"/>
+	
+<c:import url="/WEB-INF/views/template/foot.jsp"></c:import>	
+<script src="./js/index/index.js"></script>
 </body>
 </html>
