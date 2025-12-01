@@ -24,6 +24,7 @@ fileAdd.addEventListener("click", () =>{
 	let div = document.createElement("div");
 	let input = document.createElement("input");
 	input.type = "file";
+	input.name = "attach";
 	let button = document.createElement("button");
 	button.classList.add("del");
 	button.type = "button"
