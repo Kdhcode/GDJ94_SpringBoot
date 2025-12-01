@@ -1,11 +1,18 @@
 package com.winter.app.board.qna;
 
+import java.io.File;
+import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.board.BoardDTO;
+import com.winter.app.board.BoardFileDTO;
 import com.winter.app.board.BoardService; // 인터페이스 임포트
 import com.winter.app.util.Pager;
 
@@ -14,6 +21,9 @@ public class QnaService implements BoardService { // BoardService 구현
 	
 	@Autowired
 	private QnaDAO qnaDAO;
+	
+	@Value("${app.upload.qna}")
+	private String uploadPath;
 	
 	@Override
 	public List<BoardDTO> list (Pager pager)throws Exception{
@@ -28,10 +38,31 @@ public class QnaService implements BoardService { // BoardService 구현
 	}
 	
 	@Override
-	public int add(BoardDTO boardDTO)throws Exception{
-		QnaDTO qnaDTO = (QnaDTO)boardDTO;
-		qnaDAO.add(qnaDTO); // 글 등록
-		return qnaDAO.refUpdate(qnaDTO); // REF 값 업데이트
+	public int add(BoardDTO boardDTO, MultipartFile [] attach)throws Exception{
+		int result = qnaDAO.add(boardDTO);
+	
+		for(MultipartFile f : attach) {
+			File file = new File(uploadPath);
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			String fileName = UUID.randomUUID().toString();
+			fileName = fileName + "_" + f.getOriginalFilename();
+			
+			file = new File(file, fileName);
+			
+			FileCopyUtils.copy(f.getBytes(), file);
+			
+			BoardFileDTO boardFileDTO = new QnaFileDTO();
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setFileOrigin(f.getOriginalFilename());
+			boardFileDTO.setFileNum(boardDTO.getBoardNum());
+			
+			qnaDAO.fileAdd(boardFileDTO);
+			
+		}  
+		
+		return result;
 	}
     
 	@Override
