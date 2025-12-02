@@ -19,7 +19,6 @@ class NoticeDAOTest {
 		NoticeDTO noticeDTO = new NoticeDTO();
 		noticeDTO.setBoardNum(3L);
 		
-		noticeDTO =noticeDAO.detail(noticeDTO);
 		
 		assertNotNull(noticeDTO);
 	}

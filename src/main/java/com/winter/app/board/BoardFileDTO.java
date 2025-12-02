@@ -10,5 +10,7 @@ import lombok.ToString;
 @Getter
 @ToString
 public class BoardFileDTO extends FileDTO {
+	
 	private Long boardNum;
+
 }
