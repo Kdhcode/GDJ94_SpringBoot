@@ -43,27 +43,27 @@
 
                       <div class="d-flex justify-content-between border-bottom py-2">
                         <span class="text-muted">아이디</span>
-                        <span class="fw-bold">${dto.username}</span>
+                        <span class="fw-bold">${user.username}</span>
                       </div>
 
                       <div class="d-flex justify-content-between border-bottom py-2">
                         <span class="text-muted">이름</span>
-                        <span class="fw-bold">${dto.name}</span>
+                        <span class="fw-bold">${user.name}</span>
                       </div>
 
                       <div class="d-flex justify-content-between border-bottom py-2">
                         <span class="text-muted">이메일</span>
-                        <span class="fw-bold">${dto.email}</span>
+                        <span class="fw-bold">${user.email}</span>
                       </div>
 
                       <div class="d-flex justify-content-between border-bottom py-2">
                         <span class="text-muted">전화번호</span>
-                        <span class="fw-bold">${dto.phone}</span>
+                        <span class="fw-bold">${user.phone}</span>
                       </div>
 
                       <div class="d-flex justify-content-between py-2">
                         <span class="text-muted">생일</span>
-                        <span class="fw-bold">${dto.birth}</span>
+                        <span class="fw-bold">${user.birth}</span>
                       </div>
 
                       <div class="mt-3 d-flex gap-2 justify-content-end">
