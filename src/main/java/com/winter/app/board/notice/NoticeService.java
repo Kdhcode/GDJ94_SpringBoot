@@ -1,7 +1,6 @@
 package com.winter.app.board.notice;
 
 import java.io.File;
-import java.sql.SQLDataException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.UUID;
@@ -54,6 +53,8 @@ public class NoticeService implements BoardService {
 		//글번호가 필요
 		int result = noticeDAO.add(boardDTO);
 		
+
+		
 		if(attach == null) {
 			return result;
 		}
@@ -86,21 +87,24 @@ public class NoticeService implements BoardService {
 	@Override
 	public int delete(BoardDTO boardDTO)throws Exception{
 		boardDTO = noticeDAO.detail(boardDTO);
-		// HDD에서 파일을 삭제 
+		//HDD에서 파일을 삭제
 		if(boardDTO.getFileDTOs() != null) {
 			for(BoardFileDTO boardFileDTO:boardDTO.getFileDTOs()) {
 				File file = new File(uploadPath, boardFileDTO.getFileName());
 				boolean flag = fileManager.fileDelete(file);
+				
 			}
 		}
-		//----------------
-		noticeDAO.fileDelete(boardDTO);
 		
+		//---------------
+		int result = noticeDAO.fileDelete(boardDTO);
 		return noticeDAO.delete(boardDTO);
 	}
-
+	
 	@Override
 	public BoardFileDTO fileDetail(BoardFileDTO boardFileDTO) throws Exception {
+		// TODO Auto-generated method stub
+		
 		return noticeDAO.fileDetail(boardFileDTO);
 	}
 	

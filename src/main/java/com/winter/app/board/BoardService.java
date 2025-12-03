@@ -19,6 +19,6 @@ public interface BoardService {
 	
 	public int delete(BoardDTO boardDTO)throws Exception;
 	
-	public BoardFileDTO fileDetail(BoardFileDTO boardFileDTO) throws Exception;
+	public BoardFileDTO fileDetail(BoardFileDTO boardFileDTO)throws Exception;
 
 }

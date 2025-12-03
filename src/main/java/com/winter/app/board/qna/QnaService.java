@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.board.BoardDTO;
@@ -17,7 +16,6 @@ import com.winter.app.files.FileManager;
 import com.winter.app.util.Pager;
 
 @Service
-@Transactional(rollbackFor = Exception.class)
 public class QnaService implements BoardService {
 	
 	@Autowired
@@ -26,7 +24,7 @@ public class QnaService implements BoardService {
 	@Autowired
 	private FileManager fileManager;
 	
-	@Value("${app.upload.qna}")
+	@Value("${app.upload.notice}")
 	private String uploadPath;
 
 	@Override
@@ -84,15 +82,17 @@ public class QnaService implements BoardService {
 	@Override
 	public int delete(BoardDTO boardDTO) throws Exception {
 		boardDTO = qnaDAO.detail(boardDTO);
+		//HDD에서 파일을 삭제
 		if(boardDTO.getFileDTOs() != null) {
 			for(BoardFileDTO boardFileDTO:boardDTO.getFileDTOs()) {
 				File file = new File(uploadPath, boardFileDTO.getFileName());
 				boolean flag = fileManager.fileDelete(file);
+				
 			}
 		}
 		
-		qnaDAO.fileDelete(boardDTO);
-		
+		//---------------
+		int result = qnaDAO.fileDelete(boardDTO);
 		return qnaDAO.delete(boardDTO);
 	}
 	
@@ -114,6 +114,7 @@ public class QnaService implements BoardService {
 	
 	@Override
 	public BoardFileDTO fileDetail(BoardFileDTO boardFileDTO) throws Exception {
+		// TODO Auto-generated method stub
 		return qnaDAO.fileDetail(boardFileDTO);
 	}
 	

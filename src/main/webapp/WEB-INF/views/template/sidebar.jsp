@@ -58,6 +58,7 @@
                         <h6 class="collapse-header">Custom Utilities:</h6>
                         <a class="collapse-item" href="/users/register">users</a>
                         <a class="collapse-item" href="/users/mypage">mypage</a>
+                        <a class="collapse-item" href="/users/login">login</a>
                     </div>
                 </div>
             </li>

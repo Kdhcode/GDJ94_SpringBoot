@@ -82,10 +82,6 @@
     		DELETE FROM qna WHERE board_num=#{boardNum} 
     	</delete>  	
     	
-    	<delete id="fileDelete" parameterType="QnaDTO">
-    		DELETE FROM qna_files WHERE board_num=#{boardNum} 
-    	</delete>  	
-    	
     	
     	   	<!-- fileAdd -->
     	<insert id="fileAdd" parameterType="BoardFileDTO">
@@ -93,10 +89,13 @@
     		values (null, #{fileName}, #{fileOrigin}, #{boardNum})
     	</insert>
     	
+    	<!-- file delete -->
+    	<delete id="fileDelete" parameterType="BoardDTO">
+    		DELETE FROM qna_files WHERE board_num=#{boardNum}
+    	</delete>    	
+    	<!-- file detail -->
     	<select id="fileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
-			SELECT * FROM qna_files WHERE file_num=#{fileNum}
-		</select>
-    	
-
+    		SELECT * FROM qna_files WHERE file_num=#{fileNum}
+    	</select>
     
     </mapper>
