@@ -110,7 +110,10 @@ public class QnaService implements BoardService {
 	}
 	
 	
-	
+	@Override
+	public BoardFileDTO fileDetail(BoardFileDTO boardFileDTO) throws Exception {
+		return qnaDAO.fileDetail(boardFileDTO);
+	}
 	
 
 }

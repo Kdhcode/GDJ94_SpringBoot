@@ -4,60 +4,89 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>Register</title>
-  <%-- 반드시 head.jsp를 import: 부트스트랩/SB Admin 2 CSS 포함 --%>
+  <title>myPage</title>
   <c:import url="/WEB-INF/views/template/head.jsp"></c:import>
 </head>
 <body id="page-top">
 <div id="wrapper">
 
-  <%-- Sidebar (fragment에는 html/body/page 지시어 없어야 함) --%>
   <c:import url="/WEB-INF/views/template/sidebar.jsp"></c:import>
 
-  <!-- Content Wrapper -->
   <div id="content-wrapper" class="d-flex flex-column">
-    <!-- Main Content -->
     <div id="content">
 
-      <%-- Topbar: 여기서 한 번만 import --%>
       <c:import url="/WEB-INF/views/template/topbar.jsp"></c:import>
 
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
+      <div class="container-fluid py-4">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">myPage</h1>
         </div>
 
-        <!-- Content Row -->
-        <div class="row">
-          <!-- 등록 폼 등 실제 컨텐츠 -->
-          <div class="card mb-3" style="max-width: 540px;">
-			  <div class="row no-gutters">
-			    <div class="col-md-4">
-			      <img src="..." alt="...">
-			    </div>
-			    <div class="col-md-8">
-			      <div class="card-body">
-			        <h5 class="card-title">아이디: ${dto.username}</h5>
-			        <h5 class="card-title">이름: ${dto.name}</h5>
-			        <h5 class="card-title">이메일: ${dto.email}</h5>
-			        <h5 class="card-title">전화번호: ${dto.phone}</h5>
-			        <h5 class="card-title">생일: ${dto.birth}</h5>
-			        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-			        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-			          
-          
-        </div>
-      </div>
-      <!-- /.container-fluid -->
-    </div>
-    <!-- End of Main Content -->
+        <div class="row justify-content-center">
+          <div class="col-12 col-md-10 col-lg-8 col-xl-7">
 
-    <!-- Footer -->
+            <div class="card shadow-sm border-0 mb-4">
+              <div class="card-header bg-white border-0 py-3">
+                <h6 class="m-0 fw-bold text-primary">내 정보</h6>
+              </div>
+
+              <div class="card-body">
+                <!-- Bootstrap 5: g-0 / Bootstrap 4: no-gutters (SB Admin2가 보통 BS4) -->
+                <div class="row no-gutters align-items-center">
+                  <div class="col-12 col-md-4 mb-3 mb-md-0 text-center">
+                    <!-- 이미지 경로는 일단 기존처럼. 나중에 dto 필드로 연결 -->
+                    <img src="..." class="img-fluid rounded shadow-sm" alt="profile">
+                  </div>
+
+                  <div class="col-12 col-md-8">
+                    <div class="ps-md-3">
+
+                      <div class="d-flex justify-content-between border-bottom py-2">
+                        <span class="text-muted">아이디</span>
+                        <span class="fw-bold">${dto.username}</span>
+                      </div>
+
+                      <div class="d-flex justify-content-between border-bottom py-2">
+                        <span class="text-muted">이름</span>
+                        <span class="fw-bold">${dto.name}</span>
+                      </div>
+
+                      <div class="d-flex justify-content-between border-bottom py-2">
+                        <span class="text-muted">이메일</span>
+                        <span class="fw-bold">${dto.email}</span>
+                      </div>
+
+                      <div class="d-flex justify-content-between border-bottom py-2">
+                        <span class="text-muted">전화번호</span>
+                        <span class="fw-bold">${dto.phone}</span>
+                      </div>
+
+                      <div class="d-flex justify-content-between py-2">
+                        <span class="text-muted">생일</span>
+                        <span class="fw-bold">${dto.birth}</span>
+                      </div>
+
+                      <div class="mt-3 d-flex gap-2 justify-content-end">
+                        <a href="./update" class="btn btn-primary btn-sm">정보수정</a>
+                        <a href="./password" class="btn btn-outline-secondary btn-sm">비밀번호 변경</a>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-footer bg-white border-0">
+                <small class="text-muted">마이페이지</small>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
@@ -65,11 +94,9 @@
         </div>
       </div>
     </footer>
-    <!-- End of Footer -->
   </div>
 </div>
 
-<%-- 반드시 foot.jsp를 import: jQuery/Bootstrap/플러그인 스크립트 포함 --%>
 <c:import url="/WEB-INF/views/template/foot.jsp"></c:import>
 </body>
 </html>

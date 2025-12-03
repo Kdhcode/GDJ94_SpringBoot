@@ -5,72 +5,94 @@
 <head>
   <meta charset="UTF-8" />
   <title>Register</title>
-  <%-- 반드시 head.jsp를 import: 부트스트랩/SB Admin 2 CSS 포함 --%>
   <c:import url="/WEB-INF/views/template/head.jsp"></c:import>
 </head>
 <body id="page-top">
 <div id="wrapper">
 
-  <%-- Sidebar (fragment에는 html/body/page 지시어 없어야 함) --%>
   <c:import url="/WEB-INF/views/template/sidebar.jsp"></c:import>
 
-  <!-- Content Wrapper -->
   <div id="content-wrapper" class="d-flex flex-column">
-    <!-- Main Content -->
     <div id="content">
 
-      <%-- Topbar: 여기서 한 번만 import --%>
       <c:import url="/WEB-INF/views/template/topbar.jsp"></c:import>
 
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Register</h1>
+      <div class="container-fluid py-4">
+        <div class="d-flex flex-column flex-sm-row align-items-sm-center justify-content-between mb-4">
+          <div>
+            <h1 class="h3 mb-1 text-gray-800">Register</h1>
+            <div class="small text-muted">회원가입 정보를 입력해 주세요.</div>
+          </div>
         </div>
 
-        <!-- Content Row -->
-        <div class="row">
-          <!-- 등록 폼 등 실제 컨텐츠 -->
-          <form method="post">
-			  <div class="form-row">
-			    <div class="form-group col-md-6">
-			      <label for="inputEmail4">username</label>
-			      <input type="text" class="form-control" name="username">
-			    </div>
-			    <div class="form-group col-md-6">
-			      <label for="inputPassword4">Password</label>
-			      <input type="password" class="form-control" name="password">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label for="inputAddress">name</label>
-			    <input type="text" class="form-control" name="name">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputAddress2">email</label>
-			    <input type="text" class="form-control" name="email">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputAddress2">phone</label>
-			    <input type="text" class="form-control" name="phone">
-			  </div>
-			  <div class="form-group">
-			    <label for="inputAddress2">birth</label>
-			    <input type="text" class="form-control" name="birth">
-			  </div>
-			   <div class="form-group">
-			    <label for="exampleFormControlFile1">프로필 이미지</label>
-			    <input type="file" class="form-control-file" name="attach">
-			  </div>
-			  <button type="submit" class="btn btn-primary">회원가입</button>
-			</form>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-8 col-xl-7">
+
+            <div class="card shadow-sm border-0 mb-4">
+              <div class="card-header bg-white border-0 py-3 d-flex align-items-center justify-content-between">
+                <h6 class="m-0 fw-bold text-primary">회원가입</h6>
+                <span class="badge bg-light text-secondary">Form</span>
+              </div>
+
+              <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                  <div class="row g-3">
+
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Username</label>
+                      <input type="text" class="form-control" name="username" placeholder="아이디" autocomplete="username">
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Password</label>
+                      <input type="password" class="form-control" name="password" placeholder="비밀번호" autocomplete="new-password">
+                    </div>
+
+                    <div class="col-12">
+                      <label class="form-label">Name</label>
+                      <input type="text" class="form-control" name="name" placeholder="이름" autocomplete="name">
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Email</label>
+                      <input type="email" class="form-control" name="email" placeholder="example@email.com" autocomplete="email">
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                      <label class="form-label">Phone</label>
+                      <input type="text" class="form-control" name="phone" placeholder="010-0000-0000" autocomplete="tel">
+                    </div>
+
+                    <div class="col-12">
+                      <label class="form-label">Birth</label>
+                      <input type="text" class="form-control" name="birth" placeholder="YYYY-MM-DD" autocomplete="bday">
+                      <div class="form-text">예: 1999-12-31</div>
+                    </div>
+
+                    <div class="col-12">
+                      <label class="form-label">프로필 이미지</label>
+                      <input type="file" class="form-control" name="attach" accept="image/*">
+                      <div class="form-text">jpg, png 등 이미지 파일을 업로드하세요.</div>
+                    </div>
+
+                  </div>
+
+                  <hr class="my-4">
+
+                  <div class="d-flex gap-2 justify-content-end">
+                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
+                    <button type="submit" class="btn btn-primary">회원가입</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
         </div>
+
       </div>
-      <!-- /.container-fluid -->
     </div>
-    <!-- End of Main Content -->
 
-    <!-- Footer -->
     <footer class="sticky-footer bg-white">
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
@@ -78,11 +100,9 @@
         </div>
       </div>
     </footer>
-    <!-- End of Footer -->
   </div>
 </div>
 
-<%-- 반드시 foot.jsp를 import: jQuery/Bootstrap/플러그인 스크립트 포함 --%>
 <c:import url="/WEB-INF/views/template/foot.jsp"></c:import>
 </body>
 </html>
