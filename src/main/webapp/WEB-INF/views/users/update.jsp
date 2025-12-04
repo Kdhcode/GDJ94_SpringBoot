@@ -31,7 +31,7 @@
 
             <div class="card shadow-sm border-0 mb-4">
               <div class="card-header bg-white border-0 py-3 d-flex align-items-center justify-content-between">
-                <h6 class="m-0 fw-bold text-primary">회원가입</h6>
+                <h6 class="m-0 fw-bold text-primary">회원수정</h6>
                 <span class="badge bg-light text-secondary">Form</span>
               </div>
 
@@ -39,24 +39,7 @@
                 <form:form modelAttribute="user" method="post" enctype="multipart/form-data">
                   <div class="row g-3">
 
-                    <div class="col-12 ">
-                      <label class="form-label">Username</label>
-                      <form:input path="username" cssClass="form-control"/>
-                      <form:errors path="username"></form:errors>
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                      <label class="form-label">Password</label>
-                      <form:password path="password" cssClass="form-control"/>
-                      <form:errors path="password"></form:errors>
-                    </div>
                     
-                    <div class="col-12 col-md-6">
-                      <label class="form-label">Password</label>
-                      <form:password path="passwordCheck" cssClass="form-control"/>
-                      <form:errors path="passwordCheck"></form:errors>
-                    </div>
-
                     <div class="col-12">
                       <label class="form-label">Name</label>
                       <form:input path="name" cssClass="form-control"/>
@@ -81,11 +64,6 @@
                       <form:errors path="birth"></form:errors>
                     </div>
 
-                    <div class="col-12">
-                      <label class="form-label">프로필 이미지</label>
-                      <input type="file" class="form-control" name="attach" accept="image/*">
-                      <div class="form-text">jpg, png 등 이미지 파일을 업로드하세요.</div>
-                    </div>
 
                   </div>
 
@@ -93,7 +71,7 @@
 
                   <div class="d-flex gap-2 justify-content-end">
                     <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                    <button type="submit" class="btn btn-primary">회원가입</button>
+                    <button type="submit" class="btn btn-primary">회원수정</button>
                   </div>
                 </form:form>
               </div>

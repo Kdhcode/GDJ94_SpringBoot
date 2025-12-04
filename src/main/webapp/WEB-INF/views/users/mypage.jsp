@@ -33,12 +33,12 @@
               <div class="card-body">
                 <!-- Bootstrap 5: g-0 / Bootstrap 4: no-gutters (SB Admin2가 보통 BS4) -->
                 <div class="row no-gutters align-items-center">
-                  <div class="col-12 col-md-4 mb-3 mb-md-0 text-center">
+                  <div class="col-12 col-md-5 mb-3 mr-4 mb-md-0 text-center">
                     <!-- 이미지 경로는 일단 기존처럼. 나중에 dto 필드로 연결 -->
-                    <img src="..." class="img-fluid rounded shadow-sm" alt="profile">
+                    <img src="/files/${category}/${user.userFileDTO.fileName}" class="img-fluid rounded shadow-sm " alt="profile">
                   </div>
 
-                  <div class="col-12 col-md-8">
+                  <div class="col-12 col-md-6">
                     <div class="ps-md-3">
 
                       <div class="d-flex justify-content-between border-bottom py-2">
@@ -67,8 +67,8 @@
                       </div>
 
                       <div class="mt-3 d-flex gap-2 justify-content-end">
-                        <a href="./update" class="btn btn-primary btn-sm">정보수정</a>
-                        <a href="./password" class="btn btn-outline-secondary btn-sm">비밀번호 변경</a>
+                        <a href="./update" class="btn btn-primary btn-sm mr-2">정보수정</a>
+                        <a href="./change" class="btn btn-outline-secondary btn-sm">비밀번호 변경</a>
                       </div>
 
                     </div>
