@@ -83,6 +83,7 @@
 			
 			<!-- 액션 버튼 -->
 				<div class="d-flex justify-content-end mb-4">
+					<button type="button" class="btn btn-primary mr-2 ">장바구니</button>
 					<button type="button" class="btn btn-primary mr-2 " data-toggle="modal" data-target="#commentModal">댓글등록</button>
 					<a href="./update?productNum=${dto.productNum}" class="btn btn-primary mr-2">수정하기</a>
 					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">삭제하기</button>
@@ -106,11 +107,11 @@
       <div class="modal-body">
       	<form method="post">
       		<input type="hidden" value="dto.productNum">
-      		<textarea rows="5" cols="50" name="boardContents"></textarea>
+      		<textarea rows="5" cols="50" name="boardContents" id="contents"></textarea>
       	</form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-secondary" id="close" data-dismiss="modal">취소</button>
         <button type="button" id="commentAdd" class="btn btn-primary">댓글 등록</button>
       </div>
     </div>

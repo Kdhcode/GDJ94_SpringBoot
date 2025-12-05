@@ -23,6 +23,6 @@ public interface ProductDAO {
 	
 	public int commentAdd(ProductCommentDTO productCommentDTO)throws Exception;
 	
-	
+	public Long commentCount(ProductCommentDTO productCommentDTO) throws Exception;
 	
 }
