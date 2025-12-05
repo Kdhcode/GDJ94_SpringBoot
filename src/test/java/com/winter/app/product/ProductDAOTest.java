@@ -17,7 +17,7 @@ class ProductDAOTest {
             productDTO.setProductName("productName" + i);
             productDTO.setProductContents("productContents" + i);
             productDTO.setProductCategory("category" + (i % 5));
-            productDTO.setProductRate(new java.math.BigDecimal("3.50"));
+            //productDTO.setProductRate(new java.math.BigDecimal("3.50"));
             productDTO.setProductSale(i % 2 == 0);
 
             productDAO.add(productDTO);
