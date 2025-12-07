@@ -113,5 +113,23 @@ public class ProductController {
 		int result = productService.commentAdd(productCommentDTO);
 		return result;
 	}
+	// 댓글 삭제
+	@PostMapping("commentDelete")
+	@ResponseBody
+	public int commentDelete(ProductCommentDTO dto, HttpSession session) throws Exception {
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		if (user != null) dto.setUsername(user.getUsername());
+		return productService.commentDelete(dto);
+	}
+
+	// 댓글 수정
+	@PostMapping("commentUpdate")
+	@ResponseBody
+	public int commentUpdate(ProductCommentDTO dto, HttpSession session) throws Exception {
+		UserDTO user = (UserDTO) session.getAttribute("user");
+		if (user != null) dto.setUsername(user.getUsername());
+		return productService.commentUpdate(dto);
+	}
+
 	
 }

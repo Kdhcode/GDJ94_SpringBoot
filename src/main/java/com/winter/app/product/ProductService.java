@@ -65,6 +65,12 @@ public class ProductService {
 		return productDAO.commentAdd(productCommentDTO);
 	}
 	
-	
+public int commentDelete(ProductCommentDTO dto) throws Exception {
+    return productDAO.commentDelete(dto);
+}
+
+public int commentUpdate(ProductCommentDTO dto) throws Exception {
+    return productDAO.commentUpdate(dto);
+}
 	
 }

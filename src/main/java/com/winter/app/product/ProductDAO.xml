@@ -42,24 +42,42 @@
     		
     	</update>
     	
-    	<!--  댓글  -->
-    	
-    	<select id="commentList" resultType="ProductCommentDTO" parameterType="java.util.Map">
-    		SELECT * FROM comment
-    		WHERE product_num=#{product.productNum}
-    		ORDER BY board_num DESC
-    		Limit #{pager.startNum}, #{pager.perPage}
-    	</select>
-    	
-    	<select id="commentCount" resultType="Long" parameterType="ProductCommentDTO">
-    		SELECT COUNT(board_num) FROM comment WHERE product_num=#{productNum}
-    	</select>
-    	
-    	<insert id="commentAdd" parameterType="ProductCommentDTO">
-    		INSERT INTO comment 
-    		VALUES (null, #{boardContents}, now(), #{productNum}, #{username})
-    	</insert>
-    	
-    	
+    	<!-- 댓글 목록 -->
+		<select id="commentList" resultType="ProductCommentDTO" parameterType="java.util.Map">
+		SELECT board_num, board_contents, board_date, product_num, username
+			FROM comment
+		WHERE product_num = #{product.productNum}
+		ORDER BY board_num DESC
+		LIMIT #{pager.startNum}, #{pager.perPage}
+		</select>
+
+		<!-- 댓글 전체 건수 -->
+		<select id="commentCount" resultType="Long" parameterType="ProductCommentDTO">
+		SELECT COUNT(board_num)
+			FROM comment
+		WHERE product_num = #{productNum}
+		</select>
+
+		<!-- 댓글 등록 -->
+		<insert id="commentAdd" parameterType="ProductCommentDTO">
+		INSERT INTO comment (board_contents, board_date, product_num, username)
+		VALUES (#{boardContents}, NOW(), #{productNum}, #{username})
+		</insert>
+
+		<!-- 댓글 수정 : FQCN 오타 수정 + 파라미터 이름 통일 -->
+		<update id="commentUpdate" parameterType="com.winter.app.product.ProductCommentDTO">
+		UPDATE comment
+			SET board_contents = #{boardContents}
+		WHERE board_num = #{boardNum}
+		<if test="username != null"> AND username = #{username}</if>
+		</update>
+
+		<!-- 댓글 삭제 : FQCN 오타 수정 + 파라미터 이름 통일 -->
+		<delete id="commentDelete" parameterType="com.winter.app.product.ProductCommentDTO">
+		DELETE FROM comment
+		WHERE board_num = #{boardNum}
+		<if test="username != null"> AND username = #{username}</if>
+		</delete>
+
     	
     </mapper>
