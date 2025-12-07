@@ -68,7 +68,6 @@
                     </div>
 
                     <div class="card-body p-3">
-                        <!-- /product/commentList HTML이 주입되는 영역 -->
                         <div id="list" data-product-num="${dto.productNum}"></div>
                     </div>
                 </div>
@@ -76,7 +75,12 @@
                 <!-- 액션 버튼 툴바 -->
                 <div class="btn-toolbar justify-content-end flex-wrap mt-3 mb-4" role="toolbar" aria-label="상품 액션">
                     <div class="btn-group mr-2 mb-2" role="group" aria-label="장바구니">
-                        <button type="button" class="btn btn-outline-primary">장바구니</button>
+                        <!-- ★ id, data-product-num 추가 -->
+                        <button type="button" class="btn btn-outline-primary"
+                                id="btnAddCart"
+                                data-product-num="${dto.productNum}">
+                            장바구니
+                        </button>
                     </div>
                     <div class="btn-group mr-2 mb-2" role="group" aria-label="댓글">
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#commentModal">
@@ -176,5 +180,50 @@
     });
   })();
 </script>
+<script>
+(function(){
+  const btn = document.getElementById('btnAddCart');
+  if (!btn) return;
+
+  btn.addEventListener('click', function(){
+    if (btn.dataset.loading === '1') return;
+    btn.dataset.loading = '1';
+    const originalText = btn.textContent;
+    btn.textContent = '처리 중...';
+    btn.disabled = true;
+
+    const productNum = btn.getAttribute('data-product-num') || '';
+    const body = new URLSearchParams({ productNum });
+
+    // ★ 컨텍스트패스/서블릿패스 자동 반영
+    const url = '<c:url value="/cart/add"/>';
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8' },
+      body
+    })
+    .then(r => {
+      if (!r.ok) { alert('요청 실패: ' + r.status + ' ' + r.statusText); throw new Error(); }
+      return r.text();
+    })
+    .then(t => {
+      const n = Number(t);
+      if (n === 1) {
+        if (confirm('장바구니에 담았습니다. 장바구니로 이동할까요?')) {
+          location.href = '<c:url value="/cart/list"/>';
+        }
+      } else {
+        alert('이미 장바구니에 있거나 로그인 필요합니다.');
+      }
+    })
+    .catch(e => { console.error(e); alert('장바구니 처리 중 오류'); })
+    .finally(() => { btn.dataset.loading = '0'; btn.textContent = originalText; btn.disabled = false; });
+  });
+})();
+</script>
+
+
+
+
 </body>
 </html>

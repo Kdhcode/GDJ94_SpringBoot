@@ -1,0 +1,11 @@
+package com.winter.app.cart;
+
+import java.util.List;
+import java.util.Map;
+
+public interface CartDAO {
+    int add(CartDTO dto) throws Exception;
+    int remove(CartDTO dto) throws Exception;
+    List<Map<String, Object>> listByUser(String username) throws Exception;
+    int exists(CartDTO dto) throws Exception;
+}

@@ -1,0 +1,49 @@
+package com.winter.app.cart;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
+
+import com.winter.app.users.UserDTO;
+
+import jakarta.servlet.http.HttpSession;
+
+@Controller
+@RequestMapping("/cart")
+public class CartController {
+
+    @Autowired
+    private CartService cartService;
+
+    // 내 장바구니 페이지
+    @GetMapping("/list")
+    public String list(HttpSession session, Model model) throws Exception {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user == null) return "redirect:/users/login";
+        List<Map<String,Object>> items = cartService.list(user.getUsername());
+        model.addAttribute("items", items);
+        return "cart/list";
+    }
+
+    // 담기 (AJAX)
+    @PostMapping("/add")
+    @ResponseBody
+    public int add(@RequestParam Long productNum, HttpSession session) throws Exception {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user == null) return 0;
+        return cartService.add(user.getUsername(), productNum); 
+    }
+
+    // 빼기 (AJAX)
+    @PostMapping("/remove")
+    @ResponseBody
+    public int remove(@RequestParam Long productNum, HttpSession session) throws Exception {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user == null) return 0;
+        return cartService.remove(user.getUsername(), productNum);
+    }
+}
