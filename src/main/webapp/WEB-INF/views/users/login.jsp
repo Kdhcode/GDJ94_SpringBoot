@@ -39,12 +39,12 @@
 
                     <div class="col-12 col-md-6">
                       <label class="form-label">Username</label>
-                      <input type="text" class="form-control" name="username" placeholder="아이디" value="test" autocomplete="username">
+                      <input type="text" class="form-control" name="username" placeholder="아이디" value="admin" autocomplete="username">
                     </div>
 
                     <div class="col-12 col-md-6">
                       <label class="form-label">Password</label>
-                      <input type="password" class="form-control" name="password" placeholder="비밀번호" value="test" autocomplete="new-password">
+                      <input type="password" class="form-control" name="password" placeholder="비밀번호" value="user007123!@#" autocomplete="new-password">
                     </div>
                   </div>
                   <hr class="my-4">

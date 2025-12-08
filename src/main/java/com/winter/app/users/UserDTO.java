@@ -1,8 +1,14 @@
 package com.winter.app.users;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,7 +21,7 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class UserDTO {
+public class UserDTO implements UserDetails{
 
 	@NotBlank(message = "아이디는 필수입니다.", groups = {RegisterGroup.class})
 	private String username;
@@ -52,5 +58,42 @@ public class UserDTO {
 
 	private UserFileDTO userFileDTO;
 	
+	private List<RoleDTO> roleDTOs;
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		
+		List<GrantedAuthority> list = new ArrayList<>();
+		
+		for(int i = 0; i < roleDTOs.size(); i++) {
+			GrantedAuthority g = new SimpleGrantedAuthority(roleDTOs.get(i).getRoleName());
+			list.add(g);
+		}
+		
+		return list;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 
 }

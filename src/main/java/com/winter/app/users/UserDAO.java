@@ -9,4 +9,5 @@ public interface UserDAO {
 	public int userFileAdd(UserFileDTO userFileDTO)throws Exception;
 	public UserDTO detail(UserDTO userDTO)throws Exception;
 	public int update(UserDTO userDTO)throws Exception;
+	public int roleAdd(UserDTO userDTO)throws Exception;
 }

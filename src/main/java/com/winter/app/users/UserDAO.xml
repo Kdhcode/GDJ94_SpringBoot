@@ -15,14 +15,23 @@
 			values(#{fileName}, #{fileOrigin}, #{username})
 		</insert>
     	
+    	<insert id="roleAdd" parameterType="UserDTO">
+    		INSERT INTO user_role (username, role_num)
+    		values (#{username},3)
+    	</insert>
+    	
     	<select id="detail" resultMap="detailResult" parameterType="UserDTO">
-    		SELECT *
-			FROM users U
-				 LEFT JOIN
-			     profile PF
-			     USING(username)
-			WHERE U.username=#{username}
-    	</select>
+		  SELECT
+		    u.username, u.password, u.name, u.email, u.phone, u.birth,
+		    p.file_num, p.file_name, p.file_origin,
+		    r.role_num, r.role_name
+		  FROM users u
+		  LEFT JOIN profile p ON p.username = u.username
+		  LEFT JOIN user_role ur ON ur.username = u.username
+		  LEFT JOIN role r ON ur.role_num = r.role_num
+		  WHERE u.username = #{username}
+		</select>
+
     	
     	<resultMap type="UserDTO" id="detailResult">
     		<id column="username" property="username"/>
@@ -36,6 +45,11 @@
     			<result column="file_name" property="fileName"/>
     			<result column="file_origin" property="fileOrigin"/>
     		</association>
+    		<collection property="roleDTOs" javaType="java.util.List" ofType="RoleDTO">
+			  <id column="role_num" property="roleNum"/>
+			  <result column="role_name" property="roleName"/>
+			</collection>
+
     	</resultMap>
 
     	<update id="update" parameterType="com.winter.app.users.UserDTO">

@@ -49,17 +49,6 @@ public class UserController {
 	@GetMapping("login")
 	public void login()throws Exception{}	
 	
-	@PostMapping("login")
-	public String login(UserDTO userDTO, HttpSession session)throws Exception{
-		
-		userDTO = userService.detail(userDTO);
-		
-		
-		session.setAttribute("user", userDTO);
-		
-		return "redirect:/";
-	}
-	
 	@GetMapping("update")
 	public void update(HttpSession session, Model model) throws Exception{	
 		model.addAttribute("user",session.getAttribute("user"));
@@ -94,5 +83,6 @@ public class UserController {
 		}
 		return "redirect:./mypage";
 	}
+	
 	
 }
