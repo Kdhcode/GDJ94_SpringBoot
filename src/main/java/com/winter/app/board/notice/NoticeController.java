@@ -67,8 +67,10 @@ public class NoticeController {
 		return "board/add";
 	}
 	
-	@PostMapping("add")
-	public String add(@ModelAttribute("dto") @Valid NoticeDTO noticeDTO, BindingResult bindingResult, MultipartFile [] attach)throws Exception{
+	//@PostMapping("add")
+	@GetMapping("create")
+	public String add(@ModelAttribute("dto")  NoticeDTO noticeDTO, BindingResult bindingResult, MultipartFile [] attach)throws Exception{
+		
 		
 		if (bindingResult.hasErrors()) {
 			return "board/add";
