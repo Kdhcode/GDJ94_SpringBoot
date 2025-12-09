@@ -1,9 +1,11 @@
 package com.winter.app.board.notice;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -67,15 +69,14 @@ public class NoticeController {
 		return "board/add";
 	}
 	
-	//@PostMapping("add")
-	@GetMapping("create")
-	public String add(@ModelAttribute("dto")  NoticeDTO noticeDTO, BindingResult bindingResult, MultipartFile [] attach)throws Exception{
+	@PostMapping("add")
+	public String add(@ModelAttribute("dto")  NoticeDTO noticeDTO, BindingResult bindingResult, MultipartFile [] attach, Authentication authentication)throws Exception{
 		
 		
 		if (bindingResult.hasErrors()) {
 			return "board/add";
 		}
-		
+		noticeDTO.setBoardWriter(authentication.getName()); 
 		int result = noticeService.add(noticeDTO, attach);
 		
 		return "redirect:./list";

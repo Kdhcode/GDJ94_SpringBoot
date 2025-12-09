@@ -50,7 +50,7 @@
     	         					  <form:hidden path="boardNum"/>
                                    	  <div class="form-group">
 									    <label for="writer">Writer</label>
-                                   	  	<form:input path="boardWriter" cssClass="form-control" id="writer"/>
+                                   	  	<%-- <form:input path="boardWriter" disabled cssClass="form-control" id="writer"/> --%>
 									    <%-- <input type="text" class="form-control" value="${dto.boardWriter}" id="writer" name="boardWriter" aria-describedby="emailHelp"> --%>
 									  </div>
 									  <div class="form-group">

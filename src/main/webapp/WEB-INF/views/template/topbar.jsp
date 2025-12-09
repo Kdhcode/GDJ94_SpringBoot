@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-    
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -97,14 +97,14 @@
 	                      </div>
 	                </li>
 				
-               	<c:if test="${not empty user}">
+               	<sec:authorize access="isAuthenticated()">
+               		<sec:authentication property="principal" var="user"/>
                 <!-- Nav Item - Messages -->
                 <li class="nav-item dropdown no-arrow mx-1">
                     <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-envelope fa-fw"></i>
                         <!-- Counter - Messages -->
-                        <span class="badge badge-danger badge-counter">7</span>
                     </a>
                     <!-- Dropdown - Messages -->
                     <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -148,9 +148,8 @@
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                        <img class="img-profile rounded-circle"
-                            src="/img/undraw_profile.svg">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 ">${user.username}</span>
+                            <img src="/files/user/${user.userFileDTO.fileName}" class="img-profile rounded-circle " alt="profile">
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -165,8 +164,8 @@
                         </a>
                     </div>
                 </li>
-				</c:if>
-				<c:if test="${empty user}">
+				</sec:authorize>
+				<sec:authorize access="!isAuthenticated()">
 					<li class="nav-item mx-1">
                             <a class="nav-link" href="/users/login" id="alertsDropdown" role="button"
                                  aria-haspopup="true" aria-expanded="false">
@@ -180,7 +179,7 @@
                                 <i class="fas fa-user-plus"></i>
                             </a>
                     </li>                              
-				</c:if>
+				</sec:authorize>
             </ul>
 
         </nav>

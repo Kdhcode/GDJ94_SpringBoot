@@ -2,6 +2,7 @@ package com.winter.app.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -50,22 +51,22 @@ public class UserController {
 	public void login()throws Exception{}	
 	
 	@GetMapping("update")
-	public void update(HttpSession session, Model model) throws Exception{	
-		model.addAttribute("user",session.getAttribute("user"));
+	public void update(Model model, Authentication authentication ) throws Exception{	
+		
+		model.addAttribute("user",authentication.getPrincipal());
 	}
 	@PostMapping("update")
-	public String update(@Validated(UpdateGroup.class) @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, HttpSession session ) throws Exception {
+	public String update(@Validated(UpdateGroup.class) @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, Authentication authentication ) throws Exception {
 		if(bindingResult.hasErrors()) {
 			return"users/update";
 		}
-		UserDTO loginDTO = (UserDTO)session.getAttribute("user");
+		UserDTO loginDTO = (UserDTO)authentication.getPrincipal();
 		userDTO.setUsername(loginDTO.getUsername());
 		
 		int result = userService.update(userDTO);
 		
 		if(result>0) {
 			loginDTO=userService.detail(loginDTO);
-			session.setAttribute("user",loginDTO);
 		}
 		
 		return "redirect:/";

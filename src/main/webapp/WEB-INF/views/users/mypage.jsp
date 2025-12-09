@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,7 +30,8 @@
               <div class="card-header bg-white border-0 py-3">
                 <h6 class="m-0 fw-bold text-primary">내 정보</h6>
               </div>
-
+				<sec:authorize access="isAuthenticated()">
+                   <sec:authentication property="principal" var="user"/>
               <div class="card-body">
                 <!-- Bootstrap 5: g-0 / Bootstrap 4: no-gutters (SB Admin2가 보통 BS4) -->
                 <div class="row no-gutters align-items-center">
@@ -37,42 +39,44 @@
                     <!-- 이미지 경로는 일단 기존처럼. 나중에 dto 필드로 연결 -->
                     <img src="/files/${category}/${user.userFileDTO.fileName}" class="img-fluid rounded shadow-sm " alt="profile">
                   </div>
-
-                  <div class="col-12 col-md-6">
-                    <div class="ps-md-3">
-
-                      <div class="d-flex justify-content-between border-bottom py-2">
-                        <span class="text-muted">아이디</span>
-                        <span class="fw-bold">${user.username}</span>
-                      </div>
-
-                      <div class="d-flex justify-content-between border-bottom py-2">
-                        <span class="text-muted">이름</span>
-                        <span class="fw-bold">${user.name}</span>
-                      </div>
-
-                      <div class="d-flex justify-content-between border-bottom py-2">
-                        <span class="text-muted">이메일</span>
-                        <span class="fw-bold">${user.email}</span>
-                      </div>
-
-                      <div class="d-flex justify-content-between border-bottom py-2">
-                        <span class="text-muted">전화번호</span>
-                        <span class="fw-bold">${user.phone}</span>
-                      </div>
-
-                      <div class="d-flex justify-content-between py-2">
-                        <span class="text-muted">생일</span>
-                        <span class="fw-bold">${user.birth}</span>
-                      </div>
-
-                      <div class="mt-3 d-flex gap-2 justify-content-end">
-                        <a href="./update" class="btn btn-primary btn-sm mr-2">정보수정</a>
-                        <a href="./change" class="btn btn-outline-secondary btn-sm">비밀번호 변경</a>
-                      </div>
-
-                    </div>
-                  </div>
+					
+		                  <div class="col-12 col-md-6">
+		                    <div class="ps-md-3">
+		
+		                      <div class="d-flex justify-content-between border-bottom py-2">
+		                        <span class="text-muted">아이디</span>
+		                        <span class="fw-bold">${user.username}</span>
+		                      </div>
+		
+		                      <div class="d-flex justify-content-between border-bottom py-2">
+		                        <span class="text-muted">이름</span>
+		                        <span class="fw-bold">${user.name}</span>
+		                      </div>
+		
+		                      <div class="d-flex justify-content-between border-bottom py-2">
+		                        <span class="text-muted">이메일</span>
+		                        <span class="fw-bold">${user.email}</span>
+		                      </div>
+		
+		                      <div class="d-flex justify-content-between border-bottom py-2">
+		                        <span class="text-muted">전화번호</span>
+		                        <span class="fw-bold">${user.phone}</span>
+		                      </div>
+		
+		                      <div class="d-flex justify-content-between py-2">
+		                        <span class="text-muted">생일</span>
+		                        <span class="fw-bold">${user.birth}</span>
+		                      </div>
+		
+		                      <div class="mt-3 d-flex gap-2 justify-content-end">
+		                        <a href="./update" class="btn btn-primary btn-sm mr-2">정보수정</a>
+		                        <a href="./change" class="btn btn-outline-secondary btn-sm">비밀번호 변경</a>
+		                      </div>
+		
+		                    </div>
+		                  </div>
+                  
+                  </sec:authorize>
                 </div>
               </div>
 

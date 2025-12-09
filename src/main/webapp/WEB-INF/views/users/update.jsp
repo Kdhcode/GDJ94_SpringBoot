@@ -35,48 +35,48 @@
                 <span class="badge bg-light text-secondary">Form</span>
               </div>
 
-              <div class="card-body">
-                <form:form modelAttribute="user" method="post" enctype="multipart/form-data">
-                  <div class="row g-3">
-
-                    
-                    <div class="col-12">
-                      <label class="form-label">Name</label>
-                      <form:input path="name" cssClass="form-control"/>
-                      <form:errors path="name"></form:errors>
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                      <label class="form-label">Email</label>
-                      <form:input path="email" cssClass="form-control"/>
-                      <form:errors path="email"></form:errors>
-                    </div>
-
-                    <div class="col-12 col-md-6">
-                      <label class="form-label">Phone</label>
-                      <form:input path="phone" cssClass="form-control"/>
-                      <form:errors path="phone"></form:errors>
-                    </div>
-
-                    <div class="col-12">
-                      <label class="form-label">Birth</label>
-                      <form:input path="birth" type="date" cssClass="form-control"/>
-                      <form:errors path="birth"></form:errors>
-                    </div>
-
-
-                  </div>
-
-                  <hr class="my-4">
-
-                  <div class="d-flex gap-2 justify-content-end">
-                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
-                    <button type="submit" class="btn btn-primary">회원수정</button>
-                  </div>
-                </form:form>
-              </div>
-            </div>
-
+			
+	              <div class="card-body">
+	                <form:form modelAttribute="user" method="post" enctype="multipart/form-data">
+	                  <div class="row g-3">
+						
+	                    
+	                    <div class="col-12">
+	                      <label class="form-label">Name</label>
+	                      <form:input path="name" cssClass="form-control"/>
+	                      <form:errors path="name"></form:errors>
+	                    </div>
+	
+	                    <div class="col-12 col-md-6">
+	                      <label class="form-label">Email</label>
+	                      <form:input path="email" cssClass="form-control"/>
+	                      <form:errors path="email"></form:errors>
+	                    </div>
+	
+	                    <div class="col-12 col-md-6">
+	                      <label class="form-label">Phone</label>
+	                      <form:input path="phone" cssClass="form-control"/>
+	                      <form:errors path="phone"></form:errors>
+	                    </div>
+	
+	                    <div class="col-12">
+	                      <label class="form-label">Birth</label>
+	                      <form:input path="birth" type="date" cssClass="form-control"/>
+	                      <form:errors path="birth"></form:errors>
+	                    </div>
+	
+	
+	                  </div>
+	
+	                  <hr class="my-4">
+	
+	                  <div class="d-flex gap-2 justify-content-end">
+	                    <button type="reset" class="btn btn-outline-secondary">Reset</button>
+	                    <button type="submit" class="btn btn-primary">회원수정</button>
+	                  </div>
+	                </form:form>
+	              </div>
+	            </div>
           </div>
         </div>
 
