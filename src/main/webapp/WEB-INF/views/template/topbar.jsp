@@ -148,8 +148,13 @@
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 ">${principal.name}</span>
-                            <img src="#" class="img-profile rounded-circle " alt="profile">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 ">${user.username}</span>
+                           	<c:if test="${user.enabled == true}">
+                            	<img src="/files/user/${user.userFileDTO.fileName}" class="img-profile rounded-circle " alt="profile">
+                            </c:if>
+                            <c:if test="${user.enabled == false}">
+                            	<img src="${user.userFileDTO.fileName}" class="img-profile rounded-circle " alt="profile">
+                            </c:if>
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -158,7 +163,7 @@
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>
-                        <a class="dropdown-item" href="/user/logout" data-toggle="modal" data-target="#logoutModal">
+                        <a class="dropdown-item" href="/users/logout" data-toggle="modal" data-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
                         </a>

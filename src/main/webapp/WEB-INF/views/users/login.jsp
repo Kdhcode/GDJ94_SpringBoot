@@ -50,6 +50,7 @@
                     </div>
                   </div>
                   <hr class="my-4">
+                  <a href="/oauth2/authorization/kakao">카카오로그인</a>
                   <div class="d-flex gap-2 justify-content-end">
                   <div class="form-group form-check">
 				    <input type="checkbox" name="rememberme" class="form-check-input" id="exampleCheck1">

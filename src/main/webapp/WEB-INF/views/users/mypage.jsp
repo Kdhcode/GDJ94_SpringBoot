@@ -37,7 +37,12 @@
                 <div class="row no-gutters align-items-center">
                   <div class="col-12 col-md-5 mb-3 mr-4 mb-md-0 text-center">
                     <!-- 이미지 경로는 일단 기존처럼. 나중에 dto 필드로 연결 -->
-                    <img src="/files/${category}/${user.userFileDTO.fileName}" class="img-fluid rounded shadow-sm " alt="profile">
+                    <c:if test="${user.enabled == true}">
+                    	<img src="/files/${category}/${user.userFileDTO.fileName}" class="img-profile rounded-circle " alt="profile">
+                    </c:if>
+                    <c:if test="${user.enabled == false}">
+                    	<img src="${user.userFileDTO.fileName}" class="img-profile rounded-circle " alt="profile">
+                    </c:if>
                   </div>
 					
 		                  <div class="col-12 col-md-6">
