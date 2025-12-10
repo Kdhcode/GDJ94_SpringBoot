@@ -60,7 +60,7 @@ public class QnaController {
 
 	
 	@GetMapping("add")
-	public String add(@ModelAttribute("dto") QnaDTO qnaDTO)throws Exception{
+	public String add()throws Exception{
 		return "board/add";
 	}
 	

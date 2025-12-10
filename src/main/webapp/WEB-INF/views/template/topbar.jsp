@@ -148,8 +148,8 @@
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 ">${user.username}</span>
-                            <img src="/files/user/${user.userFileDTO.fileName}" class="img-profile rounded-circle " alt="profile">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 ">${principal.name}</span>
+                            <img src="#" class="img-profile rounded-circle " alt="profile">
                     </a>
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

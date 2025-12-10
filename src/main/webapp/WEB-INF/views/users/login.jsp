@@ -32,7 +32,9 @@
                 <h6 class="m-0 fw-bold text-primary">로그인</h6>
                 <span class="badge bg-light text-secondary">Form</span>
               </div>
-
+				<div class="ml-4 text-danger ">
+					${param.message}
+				</div>
               <div class="card-body">
                 <form method="post" enctype="multipart/form-data">
                   <div class="row g-3">
@@ -49,6 +51,10 @@
                   </div>
                   <hr class="my-4">
                   <div class="d-flex gap-2 justify-content-end">
+                  <div class="form-group form-check">
+				    <input type="checkbox" name="rememberme" class="form-check-input" id="exampleCheck1">
+				    <label class="form-check-label mr-2" for="exampleCheck1">Remember Me</label>
+				  </div>
                     <button type="submit" class="btn btn-primary">로그인</button>
                   </div>
                 </form>

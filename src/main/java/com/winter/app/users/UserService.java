@@ -11,8 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.winter.app.files.FileManager;
 
-import jakarta.servlet.http.HttpSession;
-
 @Service
 public class UserService {
 
@@ -28,27 +26,28 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public boolean getError(UserDTO userDTO, BindingResult bindingResult) throws Exception{
-		// check : true -> 검증 실패, error 존재
-		// check : false -> 검증 성공, error 존재 X
-		// 1. annotation 검증 결과
+	public boolean getError(UserDTO userDTO, BindingResult bindingResult)throws Exception{
+		//check : true  -> 검증 실패, error 존재
+		//check : flase -> 검증 성공, error 존재 X
+		//1. annotation 검증 결과
 		boolean check = bindingResult.hasErrors();
 		
-		// 2. password 일치하는지 검증
+		//2. password 일치 하는지 검증
 		if(!userDTO.getPassword().equals(userDTO.getPasswordCheck())) {
-			check = true;
-//			bindingResult.rejectValue("멤버변수명", "properties의 키");
+			check=true;
+			//bindingResult.rejectValue("멤버변수명", "properties의 키");
 			bindingResult.rejectValue("passwordCheck", "user.password.equal");
 		}
 		
-		// 3. ID 중복 체크
+		//3. ID 중복 체크
 		if(userDTO.getUsername() != null) {
 			UserDTO checkDTO = userDAO.detail(userDTO);
-			if (checkDTO != null) {
-				check = true;			
-				bindingResult.rejectValue("username", "user.nameCheck");
+			if(checkDTO != null) {
+				check=true;
+				bindingResult.rejectValue("username", "user.username.duplication");
 			}
 		}
+		
 		return check;
 	}
 	
@@ -58,6 +57,7 @@ public class UserService {
 		userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 		
 		result = userDAO.register(userDTO);
+		
 		result = userDAO.roleAdd(userDTO);
 		
 		if(profile == null || profile.isEmpty()) {
@@ -91,11 +91,10 @@ public class UserService {
 		
 		return loginDTO;
 	}
-
-	public int update(UserDTO userDTO) throws Exception{
+	
+	public int update(UserDTO userDTO)throws Exception{
 		return userDAO.update(userDTO);
 	}
-	
 	
 	
 	

@@ -15,7 +15,6 @@ import com.winter.app.users.UserDTO;
 import com.winter.app.util.Pager;
 
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 
 @Controller
 @RequestMapping("/product/*")
@@ -99,37 +98,24 @@ public class ProductController {
 	
 	//-----------------------------------------------------
 	@GetMapping("commentList")
-	public void commentList(ProductCommentDTO productCommentDTO, Pager pager, Model model)throws Exception{
+	public void  commentList(ProductCommentDTO productCommentDTO, Pager pager, Model model)throws Exception{
 		List<ProductCommentDTO> list = productService.commentList(productCommentDTO, pager);
-		model.addAttribute("list",list);
-		
+		model.addAttribute("list", list);
 	}
 	
 	@PostMapping("commentAdd")
 	@ResponseBody
 	public int commentAdd(ProductCommentDTO productCommentDTO, HttpSession session)throws Exception{
+		//productCommentDTO.setUsername(((UserDTO)session.getAttribute("user")).getUsername());
+		
+		
 		UserDTO userDTO = (UserDTO)session.getAttribute("user");
 		productCommentDTO.setUsername(userDTO.getUsername());
+		
 		int result = productService.commentAdd(productCommentDTO);
+		
 		return result;
+		
 	}
-	// 댓글 삭제
-	@PostMapping("commentDelete")
-	@ResponseBody
-	public int commentDelete(ProductCommentDTO dto, HttpSession session) throws Exception {
-		UserDTO user = (UserDTO) session.getAttribute("user");
-		if (user != null) dto.setUsername(user.getUsername());
-		return productService.commentDelete(dto);
-	}
-
-	// 댓글 수정
-	@PostMapping("commentUpdate")
-	@ResponseBody
-	public int commentUpdate(ProductCommentDTO dto, HttpSession session) throws Exception {
-		UserDTO user = (UserDTO) session.getAttribute("user");
-		if (user != null) dto.setUsername(user.getUsername());
-		return productService.commentUpdate(dto);
-	}
-
 	
 }

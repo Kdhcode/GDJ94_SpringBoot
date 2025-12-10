@@ -1,6 +1,8 @@
 package com.winter.app.home;
 
+
 import java.security.Principal;
+import java.util.Enumeration;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,19 +27,25 @@ public class HomeController {
 	}
 	
 	
-	public String index5(@AuthenticationPrincipal UserDTO userDTO) throws Exception {
-		// Spring boot 3.2 이상 부터 가능
+	public String index5(@AuthenticationPrincipal UserDTO userDTO)throws Exception{
+		//Spring boot 3.2 이상 부터 가능
+		
+		
 		System.out.println(userDTO.getUsername());
+		
 		return "index";
 	}
-
-	public String index4(Principal principal) throws Exception {
-		System.out.println(principal.getName());
-		return "index";
-	}
-
 	
-	public String index3(Authentication authentication) throws Exception {
+	public String index4(Principal principal)throws Exception{
+		//보류 error 발생
+		UserDetails userDTO = (UserDetails)principal;
+		System.out.println(userDTO.getUsername());
+		
+		return "index";
+	}
+	
+	
+	public String index3(Authentication authentication)throws Exception{
 		UserDTO userDTO = (UserDTO)authentication.getPrincipal();
 		System.out.println(userDTO.getUsername());
 		System.out.println(authentication.getName());
@@ -45,11 +53,10 @@ public class HomeController {
 	}
 	
 	
-	public String index2() throws Exception {
-		
+	public String index2()throws Exception{
 		Object obj = SecurityContextHolder.getContext().getAuthentication();
 		
-		Authentication authentication =(Authentication)obj;
+		Authentication authentication = (Authentication)obj;
 		
 		UserDTO userDTO = (UserDTO)authentication.getPrincipal();
 		
@@ -58,16 +65,21 @@ public class HomeController {
 		
 		return "index";
 	}
+	
 	
 	
 	public String index(HttpSession session)throws Exception{
-	
-		SecurityContextImpl obj = (SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
+		SecurityContextImpl obj=(SecurityContextImpl)session.getAttribute("SPRING_SECURITY_CONTEXT");
 		Authentication authentication = obj.getAuthentication();
 		log.info("{}", authentication);
-		UserDTO userDTO= (UserDTO)authentication.getPrincipal();
+		UserDTO userDTO=(UserDTO) authentication.getPrincipal();
 		System.out.println(userDTO.getUsername());
 		System.out.println(authentication.getName());
 		return "index";
 	}
 }
+
+
+
+
+

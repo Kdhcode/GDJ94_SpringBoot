@@ -2,7 +2,10 @@ package com.winter.app.users;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,58 +35,78 @@ public class UserController {
 	}
 	
 	@GetMapping("register")
-	public void register(@ModelAttribute("user") UserDTO userDTO)throws Exception{}	
+	public void register(UserDTO userDTO)throws Exception{}	
 	
 	
 	@PostMapping("register")
-	public String register(@ModelAttribute("user") @Validated(RegisterGroup.class) UserDTO userDTO,BindingResult bindingResult,MultipartFile attach)throws Exception{
-		if (userService.getError(userDTO, bindingResult)) {
+	public String register(@Validated(RegisterGroup.class) UserDTO userDTO,BindingResult bindingResult ,MultipartFile attach)throws Exception{
+		if(userService.getError(userDTO, bindingResult)) {
 			return "users/register";
 		}
-		int result = userService.register(userDTO, attach);
+		
+		//int result = userService.register(userDTO, attach);
+		
 		return "redirect:/";
 	}
 	@GetMapping("mypage")
-	public void detail()throws Exception{
-		
+	public void detail(@AuthenticationPrincipal UserDTO userDTO, Model model)throws Exception{
+		userDTO = userService.detail(userDTO);
+		model.addAttribute("user", userDTO);
 	}
 	@GetMapping("login")
-	public void login()throws Exception{}	
+	public String login(HttpSession session)throws Exception{
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+		
+		if(obj != null) {
+			return "redirect:/";
+		}
+		
+		return "users/login";
+	}	
+	
+
 	
 	@GetMapping("update")
-	public void update(Model model, Authentication authentication ) throws Exception{	
+	public void update(@AuthenticationPrincipal UserDTO userDTO ,Model model)throws Exception{
 		
-		model.addAttribute("user",authentication.getPrincipal());
+		model.addAttribute("userDTO", userDTO);
 	}
+	
 	@PostMapping("update")
-	public String update(@Validated(UpdateGroup.class) @ModelAttribute("user") UserDTO userDTO, BindingResult bindingResult, Authentication authentication ) throws Exception {
+	public String update(@Validated(UpdateGroup.class) UserDTO userDTO, BindingResult bindingResult,Authentication authentication)throws Exception{
 		if(bindingResult.hasErrors()) {
-			return"users/update";
+			return "users/update";
 		}
-		UserDTO loginDTO = (UserDTO)authentication.getPrincipal();
-		userDTO.setUsername(loginDTO.getUsername());
+		
+		
+		userDTO.setUsername(authentication.getName());
 		
 		int result = userService.update(userDTO);
 		
-		if(result>0) {
-			loginDTO=userService.detail(loginDTO);
-		}
+//		if(result>0) {
+//			//DB에서 사용자를 조회 해야 함
+//			UsernamePasswordAuthenticationToken to = new UsernamePasswordAuthenticationToken(userDTO, authentication.getCredentials(),authentication.getAuthorities());
+//			SecurityContextHolder.getContext().setAuthentication(to);
+//			
+//		}
 		
 		return "redirect:/";
 	}
 	
-	
 	@GetMapping("change")
-	public void change(@ModelAttribute("user")UserDTO userDTO) throws Exception {}
-	
+	public void change(UserDTO userDTO)throws Exception{
+		
+	}
 	
 	@PostMapping("change")
-	public String change(@Validated(PasswordGroup.class) @ModelAttribute("user")UserDTO userDTO, BindingResult bindingResult,String exist) throws Exception {
+	public String change(@Validated(PasswordGroup.class) UserDTO userDTO,BindingResult bindingResult  ,  String exist)throws Exception{
+		
 		if(userService.getError(userDTO, bindingResult)) {
 			return "users/change";
 		}
-		return "redirect:./mypage";
+		
+		return "redirect:mypage";
 	}
-	
+
 	
 }

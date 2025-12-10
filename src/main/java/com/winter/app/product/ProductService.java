@@ -52,6 +52,7 @@ public class ProductService {
 	//--------------------------------------------------
 	public List<ProductCommentDTO> commentList(ProductCommentDTO productCommentDTO, Pager pager)throws Exception{
 		pager.setPerPage(5L);
+		
 		Map<String, Object> map = new HashMap<>();
 		map.put("product", productCommentDTO);
 		map.put("pager", pager);
@@ -65,12 +66,6 @@ public class ProductService {
 		return productDAO.commentAdd(productCommentDTO);
 	}
 	
-public int commentDelete(ProductCommentDTO dto) throws Exception {
-    return productDAO.commentDelete(dto);
-}
-
-public int commentUpdate(ProductCommentDTO dto) throws Exception {
-    return productDAO.commentUpdate(dto);
-}
+	
 	
 }

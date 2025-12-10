@@ -4,15 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailSerivceImpl implements UserDetailsService{
+public class UserDetailSerivceImpl extends DefaultOAuth2UserService  implements UserDetailsService{
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Override
+	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+		// TODO Auto-generated method stub
+		return super.loadUser(userRequest);
+	}
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
 		System.out.println("로그인 요청");
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUsername(username);
@@ -20,9 +32,11 @@ public class UserDetailSerivceImpl implements UserDetailsService{
 		try {
 			userDetails = userDAO.detail(userDTO);
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new UsernameNotFoundException(username);
 		}
 		return userDetails;
 	}
+
 }
