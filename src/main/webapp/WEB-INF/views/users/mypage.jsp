@@ -38,11 +38,16 @@
                   <div class="col-12 col-md-5 mb-3 mr-4 mb-md-0 text-center">
                     <!-- 이미지 경로는 일단 기존처럼. 나중에 dto 필드로 연결 -->
                     <c:if test="${user.enabled == true}">
-                    	<img src="/files/${category}/${user.userFileDTO.fileName}" class="img-profile rounded-circle " alt="profile">
-                    </c:if>
-                    <c:if test="${user.enabled == false}">
-                    	<img src="${user.userFileDTO.fileName}" class="img-profile rounded-circle " alt="profile">
-                    </c:if>
+						<img src="/files/${category}/${user.userFileDTO.fileName}"
+						     class="img-profile img-fluid rounded border"
+						     alt="profile">
+					</c:if>
+					<c:if test="${user.enabled == false}">
+						<img src="${user.userFileDTO.fileName}"
+						     class="img-profile img-fluid rounded border"
+						     alt="profile">
+					</c:if>
+
                   </div>
 					
 		                  <div class="col-12 col-md-6">
@@ -76,6 +81,7 @@
 		                      <div class="mt-3 d-flex gap-2 justify-content-end">
 		                        <a href="./update" class="btn btn-primary btn-sm mr-2">정보수정</a>
 		                        <a href="./change" class="btn btn-outline-secondary btn-sm">비밀번호 변경</a>
+		                        <a href="./delete" class="btn btn-outline-secondary btn-sm">회원탈퇴</a>
 		                      </div>
 		
 		                    </div>
