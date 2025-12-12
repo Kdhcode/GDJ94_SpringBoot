@@ -48,17 +48,12 @@ public class ProductController {
 	@PostMapping("add")
 	public String add(ProductDTO productDTO , Model model) throws Exception {
 		int result = productService.add(productDTO);
-		String msg = "상품 등록 성공 ^^";
-		if (result < 1) {
-			msg = "상품 등록 실패 ㅠㅠ";
-			model.addAttribute("msg", msg);
-			model.addAttribute("url", "./list");
-			return "commons/result";
-		}
+		String msg = "상품 등록 성공";
+		
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("url", "./list");
-		return "commons/result";
+		return "redirect:./list";
 		
 	}
 	

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -62,15 +63,17 @@ public class QnaController {
 
 	
 	@GetMapping("add")
-	public String add()throws Exception{
+	public String add(@ModelAttribute("dto") QnaDTO qnaDTO)throws Exception{
 		return "board/add";
 	}
 	
 	@PostMapping("add")
-	public String add(QnaDTO qnaDTO, MultipartFile [] attach)throws Exception{
+	public String add(QnaDTO qnaDTO, MultipartFile [] attach, Authentication authentication)throws Exception{
 		qnaDTO.setBoardRef(0L);
 		qnaDTO.setBoardDepth(0L);
 		qnaDTO.setBoardStep(0L);
+		qnaDTO.setBoardWriter(authentication.getName());
+
 		int result = qnaService.add(qnaDTO, attach);
 		
 		return "redirect:./list";
@@ -120,22 +123,22 @@ public class QnaController {
 		boardFileDTO = qnaService.fileDetail(boardFileDTO);
 	}	
 	
-	// 예외 처리 메서드
-	@ExceptionHandler(NullPointerException.class)
-	public String exc1(Model model) {
-		
-		return "error/error_page";
-	}
-	@ExceptionHandler(Exception.class)
-	public String exc2(Model model) {
-		
-		return "error/error_page";
-	}
-	@ExceptionHandler(Throwable.class)
-	public String exc3(Model model) {
-		
-		return "error/error_page";
-	}
+//	// 예외 처리 메서드
+//	@ExceptionHandler(NullPointerException.class)
+//	public String exc1(Model model) {
+//		
+//		return "error/error_page";
+//	}
+//	@ExceptionHandler(Exception.class)
+//	public String exc2(Model model) {
+//		
+//		return "error/error_page";
+//	}
+//	@ExceptionHandler(Throwable.class)
+//	public String exc3(Model model) {
+//		
+//		return "error/error_page";
+//	}
 
 }
 

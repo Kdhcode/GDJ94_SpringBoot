@@ -35,6 +35,10 @@
 								<input type="text" class="form-control" id="productName"	name="productName" required>
 							</div>
 							<div class="mb-3">
+								<label for="productContents" class="form-label">내용</label>
+								<input type="text" class="form-control" id="productContents" name="productContents" required>
+							</div>
+							<div class="mb-3">
 								<label for="productCategory" class="form-label">카테고리</label>
 								<input type="text" class="form-control" id="productCategory" name="productCategory" required>
 							</div>

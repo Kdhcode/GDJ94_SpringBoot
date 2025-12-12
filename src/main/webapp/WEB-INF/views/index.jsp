@@ -62,7 +62,7 @@
                     	<a href="/oauth2/authorization/kakao">카카오로그인</a>
                     </sec:authorize>
                     </div>
-                
+                <h1>testest</h1>
                 </div>
                 <!-- /.container-fluid -->
             </div> 

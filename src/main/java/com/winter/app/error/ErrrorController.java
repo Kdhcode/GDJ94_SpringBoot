@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 // 예외를 전역 처리하는 controller
-@ControllerAdvice
+//@ControllerAdvice
 public class ErrrorController {
 
 	// 예외 처리 메서드
